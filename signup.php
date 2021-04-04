@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
@@ -8,20 +23,24 @@
     </div>
 
     <!-- Login Form -->
-    <form method="post">
-    <h2>LOGIN</h2>
-      <input type="text" id="login" class="fadeIn second" name="mailuid" placeholder="E-mail">
-      <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In" name="login-submit">
+    <form action="signup.inc.php" method="post">
+    <h2>Signup</h2>
+      <input type="text" id="username" class="fadeIn second" name="uid" placeholder="username">
+      <input type="text" id="login" class="fadeIn second" name="mail" placeholder="E-mail">
+      <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="Password">
+      <input type="password" id="rePass" class="fadeIn thrid" name="repwd" placeholder="Repeat Password">
+      <input type="submit" class="fadeIn fourth" value="Register" name="Register-submit">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="signup.php">Register</a>
+      <a class="underlineHover" href="index.php">Login</a>
     </div>
 
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
 <style>
 html {
     background-color: #56baed;

@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['Register-submit'])){
 
-    require "dhb.php";
+    require "dbh.php";
 
     $username = $_POST['uid'];
     $email = $_POST['mail'];
@@ -46,7 +46,7 @@ else {
             exit();
         }
         else{
-            $sql = "INSERT INTO users (uidUsers,emailUsers,pwdUsers) VALUES (?,?,?)"
+            $sql = "INSERT INTO users (uidUsers,emailUsers,pwdUsers) VALUES (?,?,?)";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt,$sql)){
                 header("Location: ../signup.php?error=sqlerror");
@@ -63,8 +63,8 @@ else {
         }
     }    
   }
-  mysqli_stmt_close($stmt)
-  mysqli_close($conn)
+  mysqli_stmt_close($stmt);
+  mysqli_close($conn);
 }
 else{
     header("Location ../signup.php");

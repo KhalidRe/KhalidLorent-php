@@ -14,6 +14,13 @@
                 <input class="form-control" id="animalName" type="name" placeholder="Animal">
         </div>
         <div class="col-md-3">
+            <div class="mt-4">
+                <button type="button" class="btn btn-success">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-3">
             <label for="fileUpload" class="form-label">Upload File</label>
             <input class="form-control" id="fileUpload" type="file">
         </div>

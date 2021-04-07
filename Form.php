@@ -20,15 +20,10 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-md-3">
-            <label for="fileUpload" class="form-label">Upload File</label>
-            <input class="form-control" id="fileUpload" type="file">
-        </div>
-        <div class="col-md-3">
-            <div class="mt-4">
-                <button type="button" class="btn btn-success">Submit</button>
-            </div>
-        </div>
+        <form action="upload.php" method="POST" enctype="multipart/form/data">
+        <input type="file" name="file">
+        <button type="submit" name="upload">Upload</button>
+        </form>
     </div>
 </div>
 

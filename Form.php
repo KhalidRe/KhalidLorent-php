@@ -26,7 +26,7 @@
 </div>
 
 <?php 
-    $query = "SELECT * FROM animals";
+    $query = "SELECT name FROM animals";
 ?>
 <div class="container mt-5">
     <table class="table table-hover">
@@ -39,14 +39,17 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($dbh->query($query) as $zoo) { ?>
-            <tr>
-                <th scope="row"></th>
-                <td><?php echo $zoo['name'] ?></td>
-                <td><?php echo $zoo['category'] ?></td>
-                <td><?php echo $zoo['birthday'] ?></td>
-            </tr>
-        <?php } ?>
+        <?php
+            foreach ($dbh->query($query) as $zoo) {
+                echo $zoo['name'] . "<br/>";
+            }
+        ?>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
     </tbody>
     </table>
 </div>

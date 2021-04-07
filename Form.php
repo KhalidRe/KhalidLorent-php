@@ -1,24 +1,33 @@
+<?php 
+    $query = "SELECT * FROM animals";
+
+    if (isset($_POST['submit'])) {
+        $searchValue = $_POST['animalName'];
+    }   
+?>
 <div class="container mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3">
-            <label for="selectAnimal" class="form-label">Select Animal</label>
-            <select class="form-select" id="selectAnimal" aria-label="Select">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-        <div class="col-md-3">
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="selectAnimal" class="form-label">Select Category</label>
+                <select class="form-select" id="selectAnimal" aria-label="Select">
+                    <option selected>Select</option>
+                    <?php foreach ($dbh->query($query) as $zoo) { ?>
+                        <option value=<?php echo $zoo['id'] ?>><?php echo $zoo['category'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="col-md-3">
                 <label for="animalName" class="form-label">Animal Name</label>
-                <input class="form-control" id="animalName" type="name" placeholder="Animal">
-        </div>
-        <div class="col-md-3">
-            <div class="mt-4">
-                <button type="button" class="btn btn-success">Search</button>
+                <input class="form-control" id="animalName" type="text" name="animalName" placeholder="Animal">
+            </div>
+            <div class="col-md-3">
+                <div class="mt-4">
+                    <input class="btn btn-success" type="submit" name="submit" value="Search" /> 
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     <div class="row mt-4">
         <div class="col-md-3">
             <label for="fileUpload" class="form-label">Upload File</label>
@@ -32,9 +41,6 @@
     </div>
 </div>
 
-<?php 
-    $query = "SELECT * FROM animals";
-?>
 <div class="container mt-5">
     <table class="table table-hover">
     <thead>
@@ -45,15 +51,13 @@
         <th scope="col">Birthday</th>
         </tr>
     </thead>
-    <tbody>
-        <?php foreach ($dbh->query($query) as $zoo) { ?>
+        <tbody>
             <tr>
                 <th scope="row"></th>
-                <td><?php echo $zoo['name'] ?></td>
-                <td><?php echo $zoo['category'] ?></td>
-                <td><?php echo $zoo['birthday'] ?></td>
+                <td>Test</td>
+                <td>Test</td>
+                <td>2018-04-03</td>
             </tr>
-        <?php } ?>
     </tbody>
     </table>
 </div>

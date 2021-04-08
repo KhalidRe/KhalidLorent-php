@@ -1,16 +1,12 @@
 <?php 
-    $query = "SELECT * FROM animals";
-
-    if (isset($_POST['submit'])) {
-        $searchValue = $_POST['animalName'];
-    }   
+    $query = "SELECT * FROM animals";  
 ?>
 <div class="container mt-5 mb-5">
     <form action="" method="post">
         <div class="row">
             <div class="col-md-3">
                 <label for="selectAnimal" class="form-label">Select Category</label>
-                <select class="form-select" id="selectAnimal" aria-label="Select">
+                <select class="form-select" id="animalCategory" name="animalCategory" aria-label="Select">
                     <option selected>Select</option>
                     <?php foreach ($dbh->query($query) as $zoo) { ?>
                         <option value=<?php echo $zoo['id'] ?>><?php echo $zoo['category'] ?></option>
@@ -41,23 +37,43 @@
     </div>
 </div>
 
+
+<?php 
+
+if (isset($_POST['submit'])) {
+    if (isset($_POST['animalName'])) {
+        $query = $dbh->prepare('SELECT * FROM animals WHERE name LIKE ?');
+        $query->execute(array('%' . $_POST['animalName'] . '%'));
+        $animals = $query->fetchAll();
+    } else if(isset($_POST['animalCategory'])) {
+        $query = $dbh->prepare('SELECT * FROM animals WHERE category LIKE ?');
+        $query->execute(array('%' . $_POST['animalCategory'] . '%'));
+        $animals = $query->fetchAll();
+    }
+} 
+?>
+
 <div class="container mt-5">
-    <table class="table table-hover">
-    <thead>
-        <tr>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Birthday</th>
-        </tr>
-    </thead>
-        <tbody>
+    <?php if (sizeof($animals) > 0) { ?>
+        <table class="table table-hover">
+        <thead>
             <tr>
-                <th scope="row"></th>
-                <td>Test</td>
-                <td>Test</td>
-                <td>2018-04-03</td>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Birthday</th>
             </tr>
-    </tbody>
-    </table>
+        </thead>
+            <tbody>
+                <?php foreach ($animals as $a) { ?>
+                <tr>
+                    <th scope="row"></th>
+                    <td><?php echo $a['name'] ?></td>
+                    <td><?php echo $a['category'] ?></td>
+                    <td><?php echo $a['birthday'] ?></td>
+                </tr>
+                <?php } ?>
+        </tbody>
+        </table>
+    <?php } else echo "No results"; ?>
 </div>

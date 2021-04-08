@@ -9,7 +9,7 @@
                 <select class="form-select" id="animalCategory" name="animalCategory" aria-label="Select">
                     <option selected>Select</option>
                     <?php foreach ($dbh->query($query) as $zoo) { ?>
-                        <option value=<?php echo $zoo['id'] ?>><?php echo $zoo['category'] ?></option>
+                        <option value=<?php echo $zoo['category'] ?>><?php echo $zoo['category'] ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -32,15 +32,13 @@
     </div>
 </div>
 
-
 <?php 
-
 if (isset($_POST['submit'])) {
-    if (isset($_POST['animalName'])) {
+    if (!empty($_POST['animalName'])) {
         $query = $dbh->prepare('SELECT * FROM animals WHERE name LIKE ?');
         $query->execute(array('%' . $_POST['animalName'] . '%'));
         $animals = $query->fetchAll();
-    } else if(isset($_POST['animalCategory'])) {
+    } else {
         $query = $dbh->prepare('SELECT * FROM animals WHERE category LIKE ?');
         $query->execute(array('%' . $_POST['animalCategory'] . '%'));
         $animals = $query->fetchAll();

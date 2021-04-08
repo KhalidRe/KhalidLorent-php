@@ -1,5 +1,5 @@
 <?php 
-    $query = "SELECT * FROM animals";
+    $query = "SELECT DISTINCT category FROM animals" ;
 
     if (isset($_POST['submit'])) {
         $searchValue = $_POST['animalName'];

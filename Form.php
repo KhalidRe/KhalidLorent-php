@@ -29,7 +29,7 @@
         </div>
     </form>
     <div class="row mt-4">
-        <form action="upload.php" method="POST" enctype="multipart/form/data">
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
         <input type="file" name="file">
         <button type="submit" name="uplad">Upload</button>
         </form>

@@ -1,16 +1,12 @@
 <?php 
-    $query = "SELECT DISTINCT category FROM animals" ;
-
-    if (isset($_POST['submit'])) {
-        $searchValue = $_POST['animalName'];
-    }   
+    $query = "SELECT DISTINCT category FROM animals";  
 ?>
 <div class="container mt-5 mb-5">
     <form action="" method="post">
         <div class="row">
             <div class="col-md-3">
                 <label for="selectAnimal" class="form-label">Select Category</label>
-                <select class="form-select" id="selectAnimal" aria-label="Select">
+                <select class="form-select" id="animalCategory" name="animalCategory" aria-label="Select">
                     <option selected>Select</option>
                     <?php foreach ($dbh->query($query) as $zoo) { ?>
                         <option value=<?php echo $zoo['id'] ?>><?php echo $zoo['category'] ?></option>
@@ -36,31 +32,43 @@
     </div>
 </div>
 
+
 <?php 
-    $query = "SELECT name FROM animals";
+
+if (isset($_POST['submit'])) {
+    if (isset($_POST['animalName'])) {
+        $query = $dbh->prepare('SELECT * FROM animals WHERE name LIKE ?');
+        $query->execute(array('%' . $_POST['animalName'] . '%'));
+        $animals = $query->fetchAll();
+    } else if(isset($_POST['animalCategory'])) {
+        $query = $dbh->prepare('SELECT * FROM animals WHERE category LIKE ?');
+        $query->execute(array('%' . $_POST['animalCategory'] . '%'));
+        $animals = $query->fetchAll();
+    }
+} 
 ?>
+
 <div class="container mt-5">
-    <table class="table table-hover">
-    <thead>
-        <tr>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Birthday</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-            foreach ($dbh->query($query) as $zoo) {
-                echo $zoo['name'] . "<br/>";
-            }
-        ?>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-    </tbody>
-    </table>
+    <?php if (sizeof($animals) > 0) { ?>
+        <table class="table table-hover">
+        <thead>
+            <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Birthday</th>
+            </tr>
+        </thead>
+            <tbody>
+                <?php foreach ($animals as $a) { ?>
+                <tr>
+                    <th scope="row"></th>
+                    <td><?php echo $a['name'] ?></td>
+                    <td><?php echo $a['category'] ?></td>
+                    <td><?php echo $a['birthday'] ?></td>
+                </tr>
+                <?php } ?>
+        </tbody>
+        </table>
+    <?php } else echo "No results"; ?>
 </div>

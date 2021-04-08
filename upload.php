@@ -15,7 +15,7 @@ if(isset($_POST["uplad"])){
     
     if(in_array($fileActualExt, $allowed)){
         if ($fileError === 0){
-            if($fileSize < 100000){
+            if($fileSize < 1000000){
                 $fileNameNew = uniqid("",true).".".$fileActualExt;
                 $fileDest = "uploads/".$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDest);
